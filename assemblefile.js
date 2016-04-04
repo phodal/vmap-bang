@@ -4,9 +4,9 @@ var path = require('path');
 var merge = require('mixin-deep');
 var extname = require('gulp-extname');
 var permalinks = require('assemble-permalinks');
-var getDest = require('../../docs/plugins/get-dest');
-var viewEvents = require('../../docs/plugins/view-events');
-var assemble = require('../..');
+var getDest = require('./plugins/get-dest');
+var viewEvents = require('./plugins/view-events');
+var assemble = require('assemble');
 var app = assemble();
 
 /**
