@@ -52,7 +52,7 @@ app.pages.use(permalinks(':site.base/:filename.html'));
  */
 
 app.helper('markdown', require('helper-markdown'));
-app.helpers('../../docs/helpers/*.js');
+app.helpers('./helpers/*.js');
 app.helper('log', function(val) {
   console.log(val);
 });
