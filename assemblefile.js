@@ -27,7 +27,12 @@ app.data({
     base: 'site'
   }
 });
-app.data('test_data/*.json');
+
+app.data('test_data/*.json', {
+  renameKey: function(key) {
+    return 'bang_' + path.basename(key, path.extname(key));
+  }
+});
 
 /**
  * Create views collection for our site pages and blog posts.
@@ -35,8 +40,7 @@ app.data('test_data/*.json');
  */
 
 app.create('pages');
-
-app.pages.use(permalinks(':site.base/:filename.html'));
+app.pages.use(permalinks(':site.base/github/:filename.html'));
 
 /**
  * Register a handlebars helper for processing markdown.
@@ -45,7 +49,6 @@ app.pages.use(permalinks(':site.base/:filename.html'));
  * the most control.
  */
 
-app.helper('markdown', require('helper-markdown'));
 app.helpers('./helpers/*.js');
 app.helper('log', function (val) {
   console.log(val);
