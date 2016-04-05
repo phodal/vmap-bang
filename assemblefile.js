@@ -59,7 +59,6 @@ app.helper('log', function (val) {
  */
 
 app.task('load', function (cb) {
-  app.partials('src/templates/includes/*.hbs');
   app.layouts('src/templates/layouts/*.hbs');
   app.pages('src/templates/pages/*.hbs');
   cb();
@@ -81,7 +80,9 @@ app.task('default', ['load'], function () {
         file.path = file.data.permalink + userName + '.html';
         file.base = path.dirname(file.path);
         return file.base;
-      }))
+      }));
+
+    stream.end();
   });
 });
 
