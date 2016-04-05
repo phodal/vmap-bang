@@ -69,7 +69,7 @@ app.task('load', function (cb) {
 app.task('default', ['load'], function() {
   return app.toStream('pages')
     .on('error', console.log)
-    .pipe(app.renderFile('md'))
+    .pipe(app.renderFile('hbs'))
     .on('error', console.log)
     .pipe(extname())
     .pipe(app.dest(function(file) {
