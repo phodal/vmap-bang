@@ -17,7 +17,7 @@ app.use(viewEvents('permalink'));
 app.use(permalinks());
 app.use(getDest());
 
-app.onPermalink(/./, function(file, next) {
+app.onPermalink(/./, function (file, next) {
   file.data = merge({}, app.cache.data, file.data);
   next();
 });
@@ -27,6 +27,7 @@ app.data({
     base: 'site'
   }
 });
+app.data('test_data/*.json');
 
 /**
  * Create views collection for our site pages and blog posts.
@@ -34,14 +35,7 @@ app.data({
  */
 
 app.create('pages');
-app.create('posts', {
-  pager: true,
-  renameKey: function(key, view) {
-    return view ? view.basename : path.basename(key);
-  }
-});
 
-app.posts.use(permalinks(':site.base/blog/:filename.html'));
 app.pages.use(permalinks(':site.base/:filename.html'));
 
 /**
@@ -53,7 +47,7 @@ app.pages.use(permalinks(':site.base/:filename.html'));
 
 app.helper('markdown', require('helper-markdown'));
 app.helpers('./helpers/*.js');
-app.helper('log', function(val) {
+app.helper('log', function (val) {
   console.log(val);
 });
 
@@ -61,11 +55,10 @@ app.helper('log', function(val) {
  * Tasks for loading and rendering our templates
  */
 
-app.task('load', function(cb) {
+app.task('load', function (cb) {
   app.partials('src/templates/includes/*.hbs');
   app.layouts('src/templates/layouts/*.hbs');
   app.pages('src/templates/pages/*.hbs');
-  app.posts('src/content/*.md');
   cb();
 });
 
@@ -75,7 +68,6 @@ app.task('load', function(cb) {
 
 app.task('default', ['load'], function() {
   return app.toStream('pages')
-    .pipe(app.toStream('posts'))
     .on('error', console.log)
     .pipe(app.renderFile('md'))
     .on('error', console.log)
