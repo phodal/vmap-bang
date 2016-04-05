@@ -70,12 +70,20 @@ app.task('load', function (cb) {
 
 var detailContent = new Buffer(fs.readFileSync('src/templates/pages/blog.hbs'));
 
-['justjavac', 'phodal', 'daimajia'].forEach(function (userName, index) {
-  var userData = app.cache.data['bang_' + userName];
-  app.page(userName + '.hbs', {
-    contents: detailContent,
-    locals: userData,
-    data: {layout: 'default'}
+fs.readdir(process.cwd() + '/test_data', function (err, files) {
+  if (err) {
+    console.log(err);
+    return;
+  }
+
+  files.forEach(function (filename) {
+    var userName = filename.split('.')[0];
+    var userData = app.cache.data['bang_' + userName];
+    app.page(userName + '.hbs', {
+      contents: detailContent,
+      locals: userData,
+      data: {layout: 'default'}
+    });
   });
 });
 
