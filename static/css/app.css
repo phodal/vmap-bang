@@ -1,0 +1,15 @@
+
+.search-box {
+  margin: 0 auto;
+  padding: 50px 0;
+}
+
+.input-box {
+  width: 80%;
+  display: inline-block;
+}
+
+.search-button {
+  margin-top: 12px;
+  margin-left: -4px;
+}
