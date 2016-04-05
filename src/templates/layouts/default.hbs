@@ -1,18 +1,54 @@
 <!DOCTYPE html>
 <html class="no-js" lang="zh-cn" dir="ltr">
-  <head>
-      <meta charset="utf-8">
-      <meta http-equiv="x-ua-compatible" content="ie=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="../static/css/foundation.css">
-      <link rel="stylesheet" href="../static/css/app.css">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/foundation.css">
+    <link rel="stylesheet" href="../static/css/app.css">
     <title>{{title}}</title>
-  </head>
-  <body>
-    {% body %}
-  </body>
-  <script src="../static/js/vendor/jquery.js"></script>
-  <script src="../static/js/vendor/what-input.js"></script>
-  <script src="../static/js/vendor/foundation.js"></script>
-  <script src="../static/js/app.js"></script>
+</head>
+<body>
+
+<div class="title-bar" data-responsive-toggle="realEstateMenu" data-hide-for="small">
+    <button class="menu-icon" type="button" data-toggle></button>
+    <div class="title-bar-title">Menu</div>
+</div>
+<div class="top-bar" id="realEstateMenu">
+    <div class="top-bar-left">
+        <ul class="menu" data-responsive-menu="accordion">
+            <li class="menu-text">V Map</li>
+            <li><a href="/">Home</a></li>
+            <li><a href="https://github.com/phodal/vmap">Github</a></li>
+        </ul>
+    </div>
+    <div class="top-bar-right">
+        <ul class="menu">
+            <li><a href="#">Login</a></li>
+        </ul>
+    </div>
+</div>
+
+{% body %}
+<footer>
+    <div class="row">
+        <div class="medium-6 columns">
+            <ul class="menu">
+                <li><a href="#">Legal</a></li>
+                <li><a href="#">Partner</a></li>
+                <li><a href="#">Explore</a></li>
+            </ul>
+        </div>
+        <div class="medium-6 columns">
+            <ul class="menu float-right">
+                <li class="menu-text">Copyright</li>
+            </ul>
+        </div>
+    </div>
+</footer>
+<script src="../static/js/vendor/jquery.js"></script>
+<script src="../static/js/vendor/what-input.js"></script>
+<script src="../static/js/vendor/foundation.js"></script>
+<script src="../static/js/app.js"></script>
+</body>
 </html>

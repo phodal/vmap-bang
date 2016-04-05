@@ -2,9 +2,40 @@
 layout: default
 ---
 
-<h1><a href="{{html_url}}">{{name}}</a></h1>
-<img src="{{avatar_url}}" alt="">
-<p>{{company}}, <a href="{{blog}}">{{blog}}</a>, {{location}}, {{email}}</p>
-Create: {{created_at}},
+<br>
 
-Update: {{updated_at}},
+<div class="row">
+    <div class="medium-7 large-6 columns">
+        <h1>{{name}}</h1>
+        <p class="subheader">Hi, I'm {{name}}!</p>
+        <a href="mailto:{{email}}" class="button" target="_blank">约</a>
+    </div>
+    <div class="show-for-large large-3 columns">
+        <img src="{{avatar_url}}" alt="{{name}}'s Avatar">
+    </div>
+    <div class="medium-5 large-3 columns">
+        <div class="callout secondary">
+            <form>
+                <div class="row">
+                    <div class="small-12 columns">
+                        <label>Find Your Dream Planet
+                            <input type="text" placeholder="Search destinations">
+                        </label>
+                    </div>
+                    <div class="small-12 columns">
+                        <label>Number of Moons
+                            <input type="number" placeholder="Moons required">
+                        </label>
+                        <button type="submit" class="button">Search Now!</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row column">
+    <hr>
+</div>
+<div class="row column">
+    <p class="lead">Trending Planetary Destinations</p>
+</div>
