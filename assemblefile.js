@@ -68,10 +68,12 @@ app.task('load', function (cb) {
  * Default task
  */
 
+var detailContent = new Buffer(fs.readFileSync('src/templates/pages/blog.hbs'));
+
 ['justjavac', 'phodal', 'daimajia'].forEach(function (userName, index) {
   var userData = app.cache.data['bang_' + userName];
   app.page(userName + '.hbs', {
-    contents: '<h1>Welcome to {{name}}!</h1><img src="https://avatars.githubusercontent.com/u/2503423?v=3" alt=""> ',
+    contents: detailContent,
     locals: userData,
     data: {layout: 'default'}
   });
