@@ -70,7 +70,11 @@ app.task('load', function (cb) {
 
 ['justjavac', 'phodal', 'daimajia'].forEach(function (userName, index) {
   var userData = app.cache.data['bang_' + userName];
-  app.page(userName + '.hbs', {contents: '<h1>Welcome to {{name}}!</h1><img src="https://avatars.githubusercontent.com/u/2503423?v=3" alt=""> ', locals: userData});
+  app.page(userName + '.hbs', {
+    contents: '<h1>Welcome to {{name}}!</h1><img src="https://avatars.githubusercontent.com/u/2503423?v=3" alt=""> ',
+    locals: userData,
+    data: {layout: 'default'}
+  });
 });
 
 app.task('default', ['load'], function () {
