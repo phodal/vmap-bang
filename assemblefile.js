@@ -1,6 +1,7 @@
 'use strict';
 
 var path = require('path');
+var fs = require('fs');
 var merge = require('mixin-deep');
 var extname = require('gulp-extname');
 var permalinks = require('assemble-permalinks');
@@ -60,7 +61,6 @@ app.helper('log', function (val) {
 
 app.task('load', function (cb) {
   app.layouts('src/templates/layouts/*.hbs');
-  app.pages('src/templates/pages/*.hbs');
   cb();
 });
 
@@ -68,22 +68,19 @@ app.task('load', function (cb) {
  * Default task
  */
 
+['justjavac', 'phodal', 'daimajia'].forEach(function (userName, index) {
+  var userData = app.cache.data['bang_' + userName];
+  app.page(userName + '.hbs', {contents: '<h1>Welcome to {{name}}!</h1><img src="https://avatars.githubusercontent.com/u/2503423?v=3" alt=""> ', locals: userData});
+});
+
 app.task('default', ['load'], function () {
-  ['justjavac', 'phodal', 'daimajia'].forEach(function (userName, index) {
-    var userData = app.cache.data['bang_' + userName];
-    var stream = app.toStream('pages');
+  var stream = app.toStream('pages');
+  stream.pipe(app.renderFile())
+    .on('error', console.log)
+    .pipe(extname())
+    .pipe(app.dest('site'));
 
-    stream.pipe(app.renderFile('hbs', userData))
-      .on('error', console.log)
-      .pipe(extname())
-      .pipe(app.dest(function (file) {
-        file.path = file.data.permalink + userName + '.html';
-        file.base = path.dirname(file.path);
-        return file.base;
-      }));
-
-    stream.end();
-  });
+  stream.end();
 });
 
 /**
