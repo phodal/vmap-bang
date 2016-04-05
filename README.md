@@ -1,7 +1,13 @@
 # bang: The Generator of V Map
 
 
+**Setup**
 
+    npm install
+    
+**Run**
+    
+    assemble
 
 License
 ---
