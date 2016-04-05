@@ -82,7 +82,7 @@ fs.readdir(process.cwd() + '/test_data', function (err, files) {
     app.page(userName + '.hbs', {
       contents: detailContent,
       locals: userData,
-      data: {layout: 'default'}
+      data: {layout: 'default', title: "V Map " + userData.name + "' Profile"}
     });
   });
 });
