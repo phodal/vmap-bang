@@ -29,7 +29,7 @@ app.data({
 });
 
 app.data('test_data/*.json', {
-  renameKey: function(key) {
+  renameKey: function (key) {
     return 'bang_' + path.basename(key, path.extname(key));
   }
 });
@@ -40,7 +40,7 @@ app.data('test_data/*.json', {
  */
 
 app.create('pages');
-app.pages.use(permalinks(':site.base/github/:filename.html'));
+app.pages.use(permalinks(':site.base/github/'));
 
 /**
  * Register a handlebars helper for processing markdown.
@@ -69,17 +69,20 @@ app.task('load', function (cb) {
  * Default task
  */
 
-app.task('default', ['load'], function() {
-  return app.toStream('pages')
-    .on('error', console.log)
-    .pipe(app.renderFile('hbs'))
-    .on('error', console.log)
-    .pipe(extname())
-    .pipe(app.dest(function(file) {
-      file.path = file.data.permalink;
-      file.base = path.dirname(file.path);
-      return file.base;
-    }));
+app.task('default', ['load'], function () {
+  ['justjavac', 'phodal', 'daimajia'].forEach(function (userName, index) {
+    var userData = app.cache.data['bang_' + userName];
+    var stream = app.toStream('pages');
+
+    stream.pipe(app.renderFile('hbs', userData))
+      .on('error', console.log)
+      .pipe(extname())
+      .pipe(app.dest(function (file) {
+        file.path = file.data.permalink + userName + '.html';
+        file.base = path.dirname(file.path);
+        return file.base;
+      }))
+  });
 });
 
 /**
